@@ -182,11 +182,15 @@ class Robot:
         pp(self.__GET("/rw/rapid/tasks/" + task_name + "/modules/" + module_name + "/routine" + "?row=0&column=0"))
 
     def set_rapid_variable(self, variable, value):
-        """ 
+        """
         Set a Rapid Variable with the given value.\n
         The variable must be a string in the format `task_name/module_name/variable_name`
         """
-        self.__POST("/rw/rapid/symbol/RAPID/" + variable + "/data?mastership=implicit", data={"value": value})
+        value = '"' + value + '"' if isinstance(value, str) else value.__str__()
+        self.__POST(
+            "/rw/rapid/symbol/RAPID/" + variable + "/data?mastership=implicit",
+            data={"value": value},
+        )
 
     def get_rapid_variable(self, url=None, variable=None) -> str:
         if url is None:

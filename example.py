@@ -28,9 +28,11 @@ class Example:
                 y = 100 + random.random() * 300
                 z = 0 + random.random() * 300
 
+                coords = [x, y, z]
+
                 # Set the updated position in the robot
-                robcomm.set_rapid_variable(ROBOT_POS, f"[{x}, {y}, {z}]")
-                
+                robcomm.set_rapid_variable(ROBOT_POS, coords)
+
                 # Signal that the robot is not in position
                 robcomm.set_rapid_variable(ROBOT_IN_POSITION, False)
             case Example.POS:
